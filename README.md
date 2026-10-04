@@ -2,7 +2,8 @@
 
 This dataset is developed for the research paper:
 
-**"用於智慧製造即時派工之集中式多代理人系統的深度強化學習演算法"**
+**「用於智慧製造即時派工之集中式多代理人系統的深度強化學習演算法」**
+**"A Centralized, Multi-agent System with Deep Reinforcement Learning Algorithms for Real-time Dispatch in Smart Manufacturing"**
 
 The dataset represents a production scheduling environment with multiple recipes, parallel machine groups, due-date constraints, and setup requirements.
 
