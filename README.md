@@ -84,7 +84,7 @@ This hierarchical decomposition reduces the action space of individual agents an
 * Machine-group allocation
 * PPO agent construction
 * Multi-agent model training
-* Training results and performance evaluation
+* Training results and gantt charts
 
 The notebook implements the proposed centralized multi-agent real-time dispatching framework.
 
