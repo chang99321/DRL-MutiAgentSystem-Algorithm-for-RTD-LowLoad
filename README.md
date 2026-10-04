@@ -87,15 +87,3 @@ This hierarchical decomposition reduces the action space of individual agents an
 * Training results and gantt charts
 
 The notebook implements the proposed centralized multi-agent real-time dispatching framework.
-
-## Dataset Characteristics
-
-* **Schedules:** 1,000
-* **Machine Groups:** 150
-* **Recipes:** 25
-* **Scheduling Type:** Real-time dispatching
-* **Machine Configuration:** Parallel machine groups
-* **Main Objectives:** Minimize total tardiness and setup requirements
-* **Learning Method:** Deep Reinforcement Learning
-* **Multi-Agent Algorithm:** PPO
-* **Clustering Method:** K-Means
