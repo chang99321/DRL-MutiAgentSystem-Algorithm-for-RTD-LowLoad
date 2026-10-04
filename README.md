@@ -44,3 +44,7 @@
 * 子批的實際加工能力會受到機群內機台數量影響。
 * 若子批配方與機群目前配方不同，需加入改機時間。
 * 若子批完成時間超過 `DUE_DATE`，則產生延遲。
+
+## Main Code
+
+`RL-multiAgentSystem-for-RTDproblem(lowLoad).ipynb` 為Colab環境的code，包括環境建立、模型建立、模型訓練、訓練結果等
