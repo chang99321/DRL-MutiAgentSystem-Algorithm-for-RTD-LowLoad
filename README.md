@@ -66,6 +66,17 @@ This hierarchical decomposition reduces the action space of individual agents an
 | `NEW_RECIPE` | Current processing Recipe of the machine group. If the Recipe of the next Schedule is different, a setup is required. |
 | `Arrive` | Earliest available time of the machine group, in hours. For example, `Arrive = 2` indicates that the machine group becomes available 2 hours after the beginning of the scheduling process. |
 
+## KMeans_K=5.xlsx
+
+`KMeans_K=5.xlsx` contains the results of applying **K-Means clustering with K = 5** to the Recipes.
+
+The clustering is based on two production-load features for each Recipe:
+
+- **Total number of Schedules**
+- **Total processing time of Schedules**
+
+Recipes with similar production-load characteristics are grouped into the same cluster. The resulting five Recipe clusters are used as the basis for the subsequent machine-group allocation and multi-agent PPO dispatching process.
+
 ## Scheduling Rules
 
 * Each Schedule must be assigned to one compatible machine group for processing.
