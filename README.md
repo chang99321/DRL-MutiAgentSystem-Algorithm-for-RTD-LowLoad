@@ -9,45 +9,20 @@ This dataset is developed for the research paper:
 
 The dataset represents a production scheduling environment with multiple recipes, parallel machine groups, due-date constraints, and setup requirements.
 
-## Dataset Overview
+## Problem Overview
 
-| File | Description | Records |
-|---|---|---:|
-| `schedule.csv` | Schedules waiting for dispatching | 1,000 |
-| `mach.csv` | Machine group status data | 150 |
+The dataset represents a real-time production dispatching problem involving multiple Recipes, Schedules, and parallel machine groups. Each Schedule has a required Recipe, processing time, and due date, while each machine group has a limited processing capacity, an earliest available time, and a current Recipe.
 
-The dataset contains **25 different recipes**.
+Each Schedule must be assigned to a compatible machine group. If the Schedule's Recipe differs from the current Recipe of the assigned machine group, a setup is required. The dispatching decisions continuously update machine availability and Recipe status, which affects subsequent decisions.
 
-## schedule.csv
+The main objectives are to **minimize total tardiness and the number of setups** while completing all Schedules. The problem is formulated as a sequential decision-making problem, where dispatching decisions consider due dates, processing times, machine capacity, machine availability, and setup requirements.
 
-`schedule.csv` records all Schedules waiting to be dispatched.
+## Algorithm Overview
 
-| Column | Description |
-|---|---|
-| `TT_LOT_NO` | Parent lot ID. A parent lot can be divided into multiple Schedules. |
-| `SCHEDULE` | Schedule ID, which serves as the identifier for each pending job. |
-| `DUE_DATE` | Due date of the Schedule, indicating the deadline by which the Schedule should be completed. |
-| `RECIPENAME` | Processing recipe required by the Schedule. |
-| `PROD_TIME` | Processing time in hours. |
+The proposed method uses a **hierarchical centralized multi-agent deep reinforcement learning framework** consisting of three main stages: **Recipe clustering, machine-group allocation, and real-time dispatching**.
 
-## mach.csv
+First, **K-Means clustering** is used to group Recipes with similar production characteristics based on their workload, such as the number of Schedules and total processing time. An upper-level coordinator then determines the required machine groups for each cluster based on workload, urgent Schedules, and machine-group status, and allocates machine groups using a greedy strategy.
 
-`mach.csv` records the initial status of each machine group at the beginning of the scheduling process.
+After resource allocation, each Recipe cluster is assigned an independent **Proximal Policy Optimization (PPO)** agent. Each PPO agent is responsible only for the Schedules and machine groups assigned to its cluster and selects Schedule–machine-group pairs for real-time dispatching. This hierarchical decomposition reduces the action space of individual agents while allowing them to learn dispatching strategies adapted to different production-load characteristics.
 
-| Column | Description |
-|---|---|
-| `EQP_GROUP_ID` | Machine group ID, which serves as the identifier for each machine group. |
-| `m_count` | Number of parallel machines within the machine group. A larger value indicates that more Schedules can be processed simultaneously. |
-| `NEW_RECIPE` | Current processing recipe of the machine group. If the recipe of the next Schedule is different, a setup is required. |
-| `Arrive` | Earliest available time of the machine group, in hours. For example, `Arrive = 2` indicates that the machine group becomes available 2 hours after the beginning of the scheduling process. |
-
-## Scheduling Rules
-
-* Each Schedule must be assigned to one machine group for processing.
-* The processing capacity of a machine group is affected by the number of parallel machines within the group.
-* If the recipe of a Schedule differs from the current recipe of the assigned machine group, a setup time is required.
-* If the completion time of a Schedule exceeds its `DUE_DATE`, tardiness is incurred.
-
-## Main Code
-
-`RL-multiAgentSystem-for-RTDproblem(lowLoad).ipynb` is a **Google Colab** notebook containing the implementation of the scheduling environment, model construction, model training, and training results.
+The proposed framework aims to improve scheduling performance by jointly considering **tardiness and setup requirements** during sequential dispatching.
