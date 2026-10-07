@@ -1,5 +1,4 @@
 # Real-Time Dispatching Dataset
-
 This dataset is developed for the research paper:
 
 **「用於智慧製造即時派工之集中式多代理人系統的深度強化學習演算法」**
